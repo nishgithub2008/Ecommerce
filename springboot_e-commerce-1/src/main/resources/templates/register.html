@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+<title>Document</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"> </a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto"></ul>
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" th:href="@{/}"
+						href="#">home</a></li>
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{/shop}" href="#">shop</a></li>
+					<li class="nav-item active"><a class="nav-link" href="#">Sign
+							Up</a></li>
+
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+	<div>
+		<div class="col-sm-6">
+			<h3 style="margin-top: 10px">Sign Up Now</h3>
+			<p>Please fill out this to register</p>
+
+<style>
+span {
+	color: red;
+}
+h7{
+color:red;}
+
+.container-fluid {
+	background-image:
+		url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?w=2000');
+	background-size: cover;
+}
+
+body {
+	background-image:
+		url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?w=2000');
+	background-size: cover;
+}
+
+</style>
+			<form th:action="@{/register}" th:object="${user}" method="post">
+			
+			<div class="form-group">
+					<label for="email">Email</label><span>*</span>
+					
+					
+
+					<input type="email" name="email" id="email" required
+						placeholder="Your email" class="form-control form-control-lg"
+						onkeyup="emailValidation()"> <span id="email-error"></span>
+						<br>
+						<h7 th:text="${param.msg1}"></h7>
+					
+				</div>
+				 <div class="form-group">
+					<label for="username">User-name</label><span>*</span> <input
+						 type="text"  id="username" minlength="5" 
+						name="username" required  
+						placeholder="Your username" class="form-control form-control-lg" onkeyup="checkUserName()"/><span id="username-error"></span/> </div>
+						
+						
+						<br>
+						
+					<div class="form-group">
+						<label for="password">password</label> <span>*</span><input
+							type="password" minlength="8"
+							name="password"
+							class="form-control form-control-lg" placeholder="Password"
+							id="myInput"> <input type="checkbox" 
+							onclick="myFunction()">
+							
+						
+						<p>
+						Show Password 
+						</p>
+						<script>function myFunction() {
+								  var x = document.getElementById("myInput");
+								  if (x.type === "password") {
+								    x.type = "text";
+								  } else {
+								    x.type = "password";
+								  }
+								}</script>
+					</div>
+					<input type="submit" value="Register"
+						class="btn btn-primary btn-block"> <a href="login"><p>Login existing User...</p>
+						 </a>
+			</form>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+
+function emailValidation()
+{
+  value = document.getElementById('email').value;
+  apos=value.indexOf("@"); console.log("@ = "+apos);
+  dotpos=value.lastIndexOf("."); console.log("lastIndexOfdot = "+dotpos);
+  lastpos=value.length-1;console.log("lastpos"+lastpos);
+  if (apos < 1 || dotpos-apos < 2 || lastpos-dotpos > 3 || lastpos-dotpos < 2){
+	  document.getElementById("email-error").style.color = "red";
+      document.getElementById("email-error").innerHTML = "Invalid Email Address";
+      return false;
+    } else {
+    	  document.getElementById("email-error").style.color = "green";
+          document.getElementById("email-error").innerHTML = "Valid Email Address";
+      return true;
+  }
+}
+
+
+	function checkRegexName(username){
+	var re = /^[a-zA-Z0-9]*$/;
+	
+	return re.test(username);
+    }
+
+
+
+
+function checkUserName(){
+	
+	let username=$('#username').val()
+	if(checkRegexName(username)){
+		$('#username-error').css('color','green')
+		$('#username-error').html('Valid')
+		return true;
+	}else{
+		$('#username-error').css('color','red')
+		$('#username-error').html('Invalid	')
+		return false;
+	}
+} 
+
+function checkValidation(){
+	
+	
+	let hasErrors=true
+	
+	if(!checkUserName()){
+		hasErrors=false
+	}
+}
+</script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+		
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous" >
+	
+	</script>
+</body>
+</html>
